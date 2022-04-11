@@ -1,10 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-class User(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254)
+class CustomUser(User):
     user_type = models.CharField(max_length=50)
     geo_location = models.CharField(max_length=50)
 
