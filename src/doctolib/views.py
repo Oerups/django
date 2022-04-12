@@ -86,10 +86,8 @@ def appointment(request, practician_id):
 
     return render(request, 'appointment/index.html', {'practician': practician})
 
-
-# def practician_slots()
 @login_required
-def new_practician_slot(request):
+def practician_slots(request):
     if request.method == 'POST':
         form = SlotCreationForm(request.POST)
         if form.is_valid():

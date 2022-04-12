@@ -29,10 +29,10 @@
             <tbody>
             {% for practician in practicians %}
             <tr>
-                <td>{{ practician.email }}</td>
+                <td>{{ practician.username }}</td>
                 <td>
                 {% for ticket in practician.tickets.all %}
-                    {{ ticket.title }}
+                    {{ ticket.title }}<br />
                 {% endfor %}
                 </td>
                 <td><a href="/appointment/practician/{{ practician.id }}">Consulter</a></td>

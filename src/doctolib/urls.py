@@ -28,6 +28,6 @@ urlpatterns = [
     path('practician/', practician, name='practician'),
     path('appointment/practician/<practician_id>', appointment, name='appointment'),
     path('accounts/register/practician', register_practician, name='register_practician'),
-    path('practician/slots', new_practician_slots, name='practician_slots'),
+    path('practician/slots', practician_slots, name='practician_slots'),
 ]
 

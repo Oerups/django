@@ -3,7 +3,7 @@
 {% block content %}
 {{ form.field.start_time }}
 <h1>Add an slot</h1>
-<form method="post" action="{% url 'new_practician_slot' %}">
+<form method="post" action="{% url 'practician_slots' %}">
     {% csrf_token %}
 
     <input id="id_start_time" type="datetime-local" name="start_time" value="{{ form.start_time.value }}" />
