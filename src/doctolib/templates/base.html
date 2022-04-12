@@ -19,6 +19,7 @@
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
+                    <li><a href="/accounts/register/practician">Become a practician</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="/accounts/logout/">Logout</a></li>
                     {% else %}
