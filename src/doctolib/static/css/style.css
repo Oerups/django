@@ -36,10 +36,13 @@ main {
     align-items: center;
 }
 
+.doctolib-bg {
+    background-color: #0098e5;
+}
 
-form {
-    display: flex;
-    flex-direction: column;
+.btn-primary {
+    background-color: #0098e5 !important;
+    border-color: #0098e5 !important;
 }
 
 

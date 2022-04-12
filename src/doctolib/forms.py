@@ -7,6 +7,10 @@ from django.utils.translation import gettext_lazy as _
 from .models import Ticket
 from .models import GeoLocation
 from .models import Slot
+from django.forms import TextInput
+from django.forms import EmailInput
+from django.forms import Select
+
 
 
 class UsernameField(forms.CharField):
@@ -85,12 +89,41 @@ class UserCreationForm(forms.ModelForm):
 class PracticianUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('description','email','geo_location',)
+        fields = ('username','description','email','geo_location',)
+        widgets = {
+            'username': TextInput(attrs={
+                'class': 'form-control',
+                'style': 'max-width: 300px;',
+                'placeholder': 'Username',
+            }),
+            'description': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Description'
+            }),
+            'email': EmailInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Email'
+            }),
+            'geo_location': Select(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Geo Location'
+            }),
+        }
 
 class TicketCreationForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ('title',)
+        widgets = {
+            'title': TextInput(attrs={
+                'class': 'form-control',
+                'style': 'max-width: 300px;',
+                'placeholder': 'Title',
+            }),
+        }
 
 class SlotCreationForm(forms.ModelForm):
     class Meta:
