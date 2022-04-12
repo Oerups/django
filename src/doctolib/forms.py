@@ -4,6 +4,8 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model, password_validation
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from .models import Ticket
+
 
 class UsernameField(forms.CharField):
     def to_python(self, value):
@@ -82,3 +84,8 @@ class PracticianUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('description','email',)
+
+class TicketCreationForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ('title',)

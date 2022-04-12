@@ -14,7 +14,7 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     {% if request.user|has_group:"practician" %}
-                        <li><a href="/practician/profile">Profile</a></li>
+                        <li><a href="/practician">Profile</a></li>
                     {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>

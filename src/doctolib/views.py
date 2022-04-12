@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import UserCreationForm, PracticianUpdateForm
+from .forms import UserCreationForm, PracticianUpdateForm, TicketCreationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -30,8 +30,19 @@ def practician_profile(request):
         form = PracticianUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('practician_profile')
-    else:
-        form = PracticianUpdateForm(instance=request.user)
 
-    return render(request, 'practician/profile.html', {'form': form})
+    return redirect('practician')
+
+def practician_tickets(request):
+    if request.method == 'POST':
+        form = TicketCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    return redirect('practician')
+
+def practician(request):
+    formUser = PracticianUpdateForm(instance=request.user)
+    formTickets = TicketCreationForm()
+
+    return render(request, 'practician/profile.html', {'formUser': formUser, 'formTickets': formTickets})

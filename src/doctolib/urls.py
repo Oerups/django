@@ -16,9 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-from .views import index
-from .views import register
-from .views import practician_profile
+from .views import *
 
 urlpatterns = [
     path('', index, name='index'),
@@ -26,5 +24,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register, name='register'),
     path('practician/profile/', practician_profile, name='practician_profile'),
+    path('practician/tickets/', practician_tickets, name='practician_tickets'),
+    path('practician/', practician, name='practician'),
 ]
 
