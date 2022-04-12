@@ -96,7 +96,8 @@ def appointment_confirm(request, practician_id, slot_id):
         practician = User.objects.get(id=practician_id)
 
         appointment = Appointment()
-        appointment.practician = practician
+        appointment.user_doctor = practician
+        appointment.user_patient = request.user
         appointment.slot = slot
         appointment.ticket = Ticket.objects.get(id=ticket)
         appointment.save()
@@ -116,3 +117,8 @@ def practician_slots(request):
 
     return render(request, 'practician/slots.html', {'form': form})
 
+@login_required
+def patient_profile(request):
+    appointments = Appointment.objects.all().filter(user_patient=request.user)
+
+    return render(request, 'patient/index.html', {'appointments': appointments})

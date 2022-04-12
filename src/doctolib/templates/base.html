@@ -17,12 +17,18 @@
                 </a>
                 <ul>
                     <li><a style="color: white;" href="/">Home</a></li>
-                    {% if request.user|has_group:"practician" %}
-                        <li><a style="color: white;" href="/practician">Profile</a></li>
+                    {% if user.is_authenticated %}
+                        {% if request.user|has_group:"practician" %}
+                            <li><a style="color: white;" href="/practician/profile">Profile</a></li>
+                        {% else %}
+                            <li><a style="color: white;" href="/patient/profile">Profile</a></li>
+                        {% endif %}
                     {% endif %}
+
                     {% if user.is_superuser %}
                         <li><a style="color: white;" href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
+
                     <li><a style="color: white;" href="/accounts/register/practician">Become a practician</a></li>
                     {% if user.is_authenticated %}
                         <li><a style="color: white;" href="/accounts/logout/">Logout</a></li>

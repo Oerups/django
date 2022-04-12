@@ -5,6 +5,10 @@
 <div class="d-flex mt-5 row w-75">
     <div class="col">
         <h1>My Profile</h1>
+        <a href="/practician/slots">Slots</a>
+
+        <br><br>
+
         <form method="post" action="{% url 'practician_profile' %}">
             {% csrf_token %}
             <div>
