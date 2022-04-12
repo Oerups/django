@@ -23,7 +23,7 @@
                     {% if user.is_superuser %}
                         <li><a style="color: white;" href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
-                    <li><a href="/accounts/register/practician">Become a practician</a></li>
+                    <li><a style="color: white;" href="/accounts/register/practician">Become a practician</a></li>
                     {% if user.is_authenticated %}
                         <li><a style="color: white;" href="/accounts/logout/">Logout</a></li>
                     {% else %}
