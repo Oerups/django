@@ -2,7 +2,7 @@
   {
     "model": "auth.group",
     "fields": {
-      "name": "Practician",
+      "name": "practician",
       "permissions": [
       ]
     }
@@ -10,7 +10,7 @@
   {
     "model": "auth.group",
     "fields": {
-      "name": "Patient",
+      "name": "patient",
       "permissions": [
       ]
     }
