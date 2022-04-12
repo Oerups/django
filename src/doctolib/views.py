@@ -64,3 +64,8 @@ def practician(request):
     tickets = Ticket.objects.filter(user=request.user)
 
     return render(request, 'practician/profile.html', {'formUser': formUser, 'formTickets': formTickets, 'tickets': tickets})
+
+def appointment(request, practician_id):
+    practician = User.objects.get(id=practician_id)
+
+    return render(request, 'appointment/index.html', {'practician': practician})

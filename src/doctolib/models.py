@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 class Slot(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

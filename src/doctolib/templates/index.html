@@ -23,6 +23,7 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Tickets</th>
+                <th scope="col">Appointment</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     {{ ticket.title }}
                 {% endfor %}
                 </td>
+                <td><a href="/appointment/practician/{{ practician.id }}">Consulter</a></td>
             </tr>
             {% endfor %}
             </tbody>
