@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from .models import Ticket
 
 def index(request):
     return render(request, 'index.html')
@@ -37,12 +38,15 @@ def practician_tickets(request):
     if request.method == 'POST':
         form = TicketCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
 
     return redirect('practician')
 
 def practician(request):
     formUser = PracticianUpdateForm(instance=request.user)
     formTickets = TicketCreationForm()
+    tickets = Ticket.objects.filter(user=request.user)
 
-    return render(request, 'practician/profile.html', {'formUser': formUser, 'formTickets': formTickets})
+    return render(request, 'practician/profile.html', {'formUser': formUser, 'formTickets': formTickets, 'tickets': tickets})

@@ -16,6 +16,8 @@
     <input type="submit" value="Validate" />
 </form>
 
+{{ user}}
+
 <table class="table">
     <thead>
     <tr>
@@ -23,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for ticket in user.tickets %}
+    {% for ticket in tickets %}
         <tr>
             <td>{{ ticket.title }}</td>
         </tr>
