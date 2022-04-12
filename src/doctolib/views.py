@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import UserCreationForm
+from .forms import UserCreationForm, PracticianUpdateForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -24,3 +24,14 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+def practician_profile(request):
+    if request.method == 'POST':
+        form = PracticianUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('practician_profile')
+    else:
+        form = PracticianUpdateForm(instance=request.user)
+
+    return render(request, 'practician/profile.html', {'form': form})

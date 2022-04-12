@@ -18,11 +18,13 @@ from django.urls import path
 from django.conf.urls import include
 from .views import index
 from .views import register
+from .views import practician_profile
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register, name='register'),
+    path('practician/profile/', practician_profile, name='practician_profile'),
 ]
 

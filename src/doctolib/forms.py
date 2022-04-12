@@ -77,3 +77,8 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class PracticianUpdateForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('description','email',)
