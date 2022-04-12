@@ -2,34 +2,58 @@
 
 {% block content %}
 
-<h1>Presentation</h1>
-<form method="post" action="{% url 'practician_profile' %}">
-    {% csrf_token %}
-    {{ formUser }}
-    <input type="submit" value="Validate" />
-</form>
+<div class="d-flex mt-5 row w-75">
+    <div class="col">
+        <h1>My Profile</h1>
+        <form method="post" action="{% url 'practician_profile' %}">
+            {% csrf_token %}
+            <div>
+                <div class="form-group">
+                    {{ formUser.username.label }}
+                    {{ formUser.username }}
+                    {{ formUser.username.errors }}
+                </div>
+                <div class="form-group mt-3">
+                    {{ formUser.description.label }}
+                    {{ formUser.description }}
+                    {{ formUser.description.errors }}
+                </div>
+                <div class="form-group mt-3">
+                    {{ formUser.email.label }}
+                    {{ formUser.email }}
+                    {{ formUser.email.errors }}
+                </div>
+                <div class="form-group mt-3">
+                    {{ formUser.geo_location.label }}
+                    {{ formUser.geo_location }}
+                    {{ formUser.geo_location.errors }}
+                </div>
+                <input class="btn btn-primary mt-3" type="submit" value="Validate" />
+            </div>
+        </form>
+    </div>
 
-<br>
+    <div class="col">
+        <h1>Tickets</h1>
+        <form method="post" action="{% url 'practician_tickets' %}">
+            {% csrf_token %}
+            <div>
+                <div class="form-group">
+                    {{ formTickets.title.label }}
+                    {{ formTickets.title }}
+                    {{ formTickets.title.errors }}
+                </div>
+            </div>
+            <input class="btn btn-primary mt-3" type="submit" value="Validate" />
+        </form>
 
-<h1>Tickets</h1>
-<form method="post" action="{% url 'practician_tickets' %}">
-    {% csrf_token %}
-    {{ formTickets }}
-    <input type="submit" value="Validate" />
-</form>
-
-<table class="table" style="width: 50%">
-    <thead>
-    <tr>
-        <th scope="col">Title</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for ticket in tickets %}
-        <tr>
-            <td>{{ ticket.title }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        <ul class="list-group mt-3" style="max-width: 300px">
+            {% for ticket in tickets %}
+                <tr>
+                    <li class="list-group-item">{{ ticket.title }}</li>
+                </tr>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
