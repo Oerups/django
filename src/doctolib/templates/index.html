@@ -21,13 +21,19 @@
         <table class="table" style="width: 50%">
             <thead>
             <tr>
-                <th scope="col">Title</th>
+                <th scope="col">Name</th>
+                <th scope="col">Tickets</th>
             </tr>
             </thead>
             <tbody>
             {% for practician in practicians %}
             <tr>
                 <td>{{ practician.email }}</td>
+                <td>
+                {% for ticket in practician.tickets.all %}
+                    {{ ticket.title }}
+                {% endfor %}
+                </td>
             </tr>
             {% endfor %}
             </tbody>

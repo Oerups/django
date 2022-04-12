@@ -18,7 +18,7 @@ class Appointment(models.Model):
 class Ticket(models.Model):
    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
    title = models.CharField(max_length=255)
-   user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+   user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, related_name='tickets')
 
    def __str__(self):
        return self.headline
@@ -29,9 +29,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
-
-    def get_type(self):
-        return self.type
 
 class GeoLocation(models.Model):
     code_departement = models.CharField(max_length=255)
