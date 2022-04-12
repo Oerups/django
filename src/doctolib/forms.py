@@ -83,7 +83,7 @@ class UserCreationForm(forms.ModelForm):
 class PracticianUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('description','email',)
+        fields = ('description','email','geo_location',)
 
 class TicketCreationForm(forms.ModelForm):
     class Meta:
