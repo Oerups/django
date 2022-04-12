@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ form.field.start_time }}
+<h1>Add an slot</h1>
+<form method="post" action="{% url 'new_practician_slot' %}">
+    {% csrf_token %}
+
+    <input id="id_start_time" type="datetime-local" name="start_time" value="{{ form.start_time.value }}" />
+    <input id="id_end_time" type="datetime-local" name="end_time" value="{{ form.end_time.value }}" />
+
+    <input type="submit" value="Validate" />
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Start time</th>
+        <th scope="col">End time</th>
+        <th scope="col">Is booked</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for slot in user.slots.all %}
+    <tr>
+        <td>{{ slot.start_time }}</td>
+        <td>{{ slot.end_time }}</td>
+        <td>{{ slot.is_booked }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

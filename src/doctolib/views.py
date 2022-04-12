@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import UserCreationForm, PracticianUpdateForm, TicketCreationForm
+from .forms import UserCreationForm, PracticianUpdateForm, TicketCreationForm, SlotCreationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -85,3 +85,18 @@ def appointment(request, practician_id):
     practician = User.objects.get(id=practician_id)
 
     return render(request, 'appointment/index.html', {'practician': practician})
+
+
+# def practician_slots()
+@login_required
+def new_practician_slot(request):
+    if request.method == 'POST':
+        form = SlotCreationForm(request.POST)
+        if form.is_valid():
+            slot = form.save(commit=False)
+            slot.user = request.user
+            slot.save()
+    else:
+        form = SlotCreationForm()
+
+    return render(request, 'practician/slots.html', {'form': form})

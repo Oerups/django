@@ -5,6 +5,7 @@ class Slot(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     is_booked = models.BooleanField(default=False)
+    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, related_name='slots')
 
 class Appointment(models.Model):
     slot = models.ForeignKey(Slot, on_delete=models.SET_NULL, null=True)

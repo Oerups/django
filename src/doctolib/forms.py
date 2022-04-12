@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import Ticket
 from .models import GeoLocation
+from .models import Slot
 
 
 class UsernameField(forms.CharField):
@@ -90,3 +91,11 @@ class TicketCreationForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ('title',)
+
+class SlotCreationForm(forms.ModelForm):
+    class Meta:
+        model = Slot
+        start_time = forms.DateTimeField
+        end_time = forms.DateTimeField
+        is_booked = forms.BooleanField()
+        fields = ('start_time', 'end_time', 'is_booked')
