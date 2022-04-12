@@ -13,7 +13,7 @@ class Appointment(models.Model):
     user_doctor = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, related_name='doctor')
     confirmed = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
-    tickets = models.ForeignKey('Ticket', on_delete=models.SET_NULL, null=True)
+    ticket = models.ForeignKey('Ticket', on_delete=models.SET_NULL, null=True)
 
 class Ticket(models.Model):
    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
