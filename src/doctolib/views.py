@@ -50,3 +50,17 @@ def practician(request):
     tickets = Ticket.objects.filter(user=request.user)
 
     return render(request, 'practician/profile.html', {'formUser': formUser, 'formTickets': formTickets, 'tickets': tickets})
+
+def chat_index(request):
+    chats = [
+        {
+            'id': 1,
+            'name': 'Chat 1',
+            'last_message': 'Hello',
+            'date': '12/12/12',
+        },
+    ]
+    return render(request, 'chat/index.html', {'chats': chats})
+
+def chat_show(request, id):
+    return render(request, 'chat/room.html', {'id': id})

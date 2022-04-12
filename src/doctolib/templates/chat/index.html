@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Derniere message</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for chat in chats %}
+            <tr>
+                    <td>{{ chat.name }}</td>
+                    <td>{{ chat.last_message }}</td>
+                    <td>{{ chat.date }}</td>
+                    <td>
+                        <a href="{{ url_for('chat_show', id=chat.id) }}">Voir</a>
+                    </td>
+                </a>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
