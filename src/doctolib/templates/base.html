@@ -3,6 +3,7 @@
     <head>
         <title>Doctolib</title>
         {% load static %}
+        {% load auth_extras %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     </head>
 
@@ -11,6 +12,9 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
+                    {% if request.user|has_group:"patient" %}
+                        <p>patient</p>
+                    {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
