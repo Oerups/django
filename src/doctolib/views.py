@@ -5,9 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from .models import Ticket
-from .models import GeoLocation
-from .models import User
+from .models import *
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -87,6 +85,24 @@ def appointment(request, practician_id):
 
     return render(request, 'appointment/index.html', {'practician': practician, 'slots': slots})
 
+def appointment_confirm(request, practician_id, slot_id):
+    if request.method == 'POST':
+        ticket = request.POST.get('ticket')
+
+        slot = Slot.objects.get(id=slot_id)
+        slot.is_booked = True
+        slot.save()
+
+        practician = User.objects.get(id=practician_id)
+
+        appointment = Appointment()
+        appointment.practician = practician
+        appointment.slot = slot
+        appointment.ticket = Ticket.objects.get(id=ticket)
+        appointment.save()
+
+    return redirect('appointment', practician_id=practician_id)
+
 @login_required
 def practician_slots(request):
     if request.method == 'POST':
@@ -99,3 +115,4 @@ def practician_slots(request):
         form = SlotCreationForm()
 
     return render(request, 'practician/slots.html', {'form': form})
+

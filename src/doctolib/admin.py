@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Ticket
 from .models import User
+from .models import Appointment
 
 class TicketAdmin(admin.ModelAdmin):
     list_display = ('id', 'title',)
@@ -11,3 +12,8 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'is_staff',)
     pass
 admin.site.register(User, UserAdmin)
+
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'confirmed', 'slot')
+    pass
+admin.site.register(Appointment, AppointmentAdmin)
