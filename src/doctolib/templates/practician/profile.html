@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+    {% extends "base.html" %}
 
 {% block content %}
 
@@ -9,6 +9,8 @@
     <input type="submit" value="Validate" />
 </form>
 
+<br>
+
 <h1>Tickets</h1>
 <form method="post" action="{% url 'practician_tickets' %}">
     {% csrf_token %}
@@ -16,9 +18,7 @@
     <input type="submit" value="Validate" />
 </form>
 
-{{ user}}
-
-<table class="table">
+<table class="table" style="width: 50%">
     <thead>
     <tr>
         <th scope="col">Title</th>

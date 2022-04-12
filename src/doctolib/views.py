@@ -6,9 +6,20 @@ from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from .models import Ticket
+from .models import GeoLocation
+from .models import User
+from django.contrib.auth.decorators import login_required
 
 def index(request):
-    return render(request, 'index.html')
+    geoLocations = GeoLocation.objects.all()
+
+    if request.method == 'POST':
+        geoLocation = request.POST.get('geoLocation')
+        practicians = User.objects.all().filter(geo_location=geoLocation)
+
+        return render(request, 'index.html', {'geoLocations': geoLocations, 'practicians': practicians})
+
+    return render(request, 'index.html', {'geoLocations': geoLocations})
 
 def register(request):
     if request.method == 'POST':
@@ -26,6 +37,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
+@login_required
 def practician_profile(request):
     if request.method == 'POST':
         form = PracticianUpdateForm(request.POST, instance=request.user)
@@ -34,6 +46,7 @@ def practician_profile(request):
 
     return redirect('practician')
 
+@login_required
 def practician_tickets(request):
     if request.method == 'POST':
         form = TicketCreationForm(request.POST)
@@ -44,6 +57,7 @@ def practician_tickets(request):
 
     return redirect('practician')
 
+@login_required
 def practician(request):
     formUser = PracticianUpdateForm(instance=request.user)
     formTickets = TicketCreationForm()

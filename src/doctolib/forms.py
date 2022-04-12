@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, get_user_model, password_validatio
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import Ticket
+from .models import GeoLocation
 
 
 class UsernameField(forms.CharField):

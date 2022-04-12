@@ -3,4 +3,34 @@
 {% block content %}
     <h1>Doctolib</h1>
     <p>Welcome to Doctolib, the best place to find a doctor in your city.</p>
+
+    <!-- display all geoLocations -->
+    <h2>Making appointments</h2>
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <select name="geoLocation">
+            {% for geoLocation in geoLocations %}
+            <option value="{{ geoLocation.id }}">{{ geoLocation }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Search a practician" />
+    </form>
+
+    {% if practicians is not empty %}
+        <h2>Practicians</h2>
+        <table class="table" style="width: 50%">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for practician in practicians %}
+            <tr>
+                <td>{{ practician.email }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock content %}

@@ -38,3 +38,6 @@ class GeoLocation(models.Model):
     nom_departement = models.CharField(max_length=255)
     code_region = models.CharField(max_length=255)
     nom_region = models.CharField(max_length=255)
+
+    def __str__(self):
+       return self.nom_departement + " " + self.code_departement + " " + self.nom_region + " " + self.code_region
