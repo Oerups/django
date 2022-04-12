@@ -19,6 +19,7 @@ from django.conf.urls import include
 from .views import *
 
 urlpatterns = [
+    path(r'', include('django_private_chat2.urls', namespace='django_private_chat2')),
     path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
