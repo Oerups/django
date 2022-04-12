@@ -83,8 +83,9 @@ def practician(request):
 
 def appointment(request, practician_id):
     practician = User.objects.get(id=practician_id)
+    slots = practician.slots.filter(is_booked=False)
 
-    return render(request, 'appointment/index.html', {'practician': practician})
+    return render(request, 'appointment/index.html', {'practician': practician, 'slots': slots})
 
 @login_required
 def practician_slots(request):

@@ -7,4 +7,33 @@
     <br/>
 
     <h3>Agenda</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Start time</th>
+            <th scope="col">End time</th>
+            <th scope="col">Tickets</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for slot in slots %}
+        <tr>
+            <td>{{ slot.start_time }}</td>
+            <td>{{ slot.end_time }}</td>
+            <form method="post" action="{% url 'appointment_confirm' %}">
+                {% csrf_token %}
+                <td>
+                    <select name="tickets">
+                        {% for ticket in practician.tickets.all %}
+                        <option value="{{ ticket.id }}">{{ ticket.title }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><input type="submit" value="Confirm" /></td>
+            </form>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
