@@ -1,43 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Doctolib</h1>
-    <p>Welcome to Doctolib, the best place to find a doctor in your city.</p>
+    <div class="w-100 doctolib-bg text-white text-center pb-3">
+        <h2 class="font-bold">Book a consultation with a health professional</h2>
 
-    <!-- display all geoLocations -->
-    <h2>Making appointments</h2>
-    <form method="post" action="{% url 'index' %}">
-        {% csrf_token %}
-        <select name="geoLocation">
-            {% for geoLocation in geoLocations %}
-            <option value="{{ geoLocation.id }}">{{ geoLocation }}</option>
-            {% endfor %}
-        </select>
-    </form>
+        <!-- display all geoLocations -->
+        <form class="form-group" method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            <div class="d-flex mx-5">
+                <select class="form-control" name="geoLocation">
+                    {% for geoLocation in geoLocations %}
+                        <option value="{{ geoLocation.id }}" {% if selectedLocation and geoLocation.id == selectedLocation|add:0 %} selected{% endif %} >{{ geoLocation }}</option>
+                    {% endfor %}
+                </select>
+                <input class="btn btn-warning" type="submit" value="Search" />
+            </div>
+        </form>
+    </div>
 
-    {% if practicians is not empty %}
-        <h2>Practicians</h2>
-        <table class="table" style="width: 50%">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Tickets</th>
-                <th scope="col">Appointment</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for practician in practicians %}
-            <tr>
-                <td>{{ practician.username }}</td>
-                <td>
-                {% for ticket in practician.tickets.all %}
-                    {{ ticket.title }}<br />
-                {% endfor %}
-                </td>
-                <td><a href="/appointment/practician/{{ practician.id }}">Consulter</a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+    <div class="mt-5 w-75 row">
+        {% for practician in practicians %}
+            <div class="card col-5 m-2">
+              <div class="card-body">
+                <h5 class="card-title">Dr. {{ practician.username }}</h5>
+                <p class="card-text">{{ practician.description }}</p>
+                <p class="card-text">{{ practician.email }}</p>
+                <p class="card-text">
+                    {% for ticket in practician.tickets.all %}
+                        <span class="badge rounded-pill bg-secondary">{{ ticket.title }}</span>
+                    {% endfor %}
+                </p>
+                <a href="/appointment/practician/{{ practician.id }}" class="btn btn-primary">Make an appointment</a>
+              </div>
+            </div>
+        {% empty %}
+            <h2>Sorry, no practicians found</h2>
+        {% endfor %}
+    </div>
 {% endblock content %}

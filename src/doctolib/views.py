@@ -15,7 +15,7 @@ def index(request):
         geoLocation = request.POST.get('geoLocation')
         practicians = User.objects.all().filter(geo_location=geoLocation)
 
-        return render(request, 'index.html', {'geoLocations': geoLocations, 'practicians': practicians})
+        return render(request, 'index.html', {'geoLocations': geoLocations, 'practicians': practicians, 'selectedLocation': geoLocation})
 
     return render(request, 'index.html', {'geoLocations': geoLocations})
 
