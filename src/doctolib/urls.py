@@ -27,6 +27,7 @@ urlpatterns = [
     path('practician/tickets/', practician_tickets, name='practician_tickets'),
     path('practician/', practician, name='practician'),
     path('appointment/practician/<practician_id>', appointment, name='appointment'),
+    path('appointment/confirm/', appointment_confirm, name='appointment_confirm'),
     path('accounts/register/practician', register_practician, name='register_practician'),
     path('practician/slots', practician_slots, name='practician_slots'),
 ]
